@@ -21,7 +21,7 @@ function App() {
   const totalTodos=todos.length
   let searchedTodos=[]
 
-  if(searchValue == 0){
+  if(searchValue === 0){
     searchedTodos= todos
   }else {
     searchedTodos = todos.filter(todo =>{
@@ -30,6 +30,14 @@ function App() {
       return todoText.includes(searchText)
     })
   }
+
+  const completeTodos = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text ===text)
+    const newtodos=[...todos]
+    newtodos[todoIndex].completed =true
+    setTodos(newtodos)
+    }
+  
 
   return (
     <React.Fragment >
@@ -45,7 +53,13 @@ function App() {
       />
      
        <TodoList className='contenedor-list'/>
-        {searchedTodos.map(todo=>(<TodoItem key={todo.text} text={todo.text} completed={todo.completed}/>))}
+        {searchedTodos.map(todo=>(
+        <TodoItem key={todo.text}
+         text={todo.text} 
+         completed={todo.completed}
+         onComplete = {()=> completeTodos(todo.text)
+        }
+         />))}
       <TodoList />
       <CreateTodoButton className='contenedor-button'/> 
       
