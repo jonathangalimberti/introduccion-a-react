@@ -1,9 +1,5 @@
 import React from 'react'
-import {TodoCounter} from './TodoCounter.js'
-import {TodoSearch} from './TodoSeach'
-import {TodoList} from './TodoList'
-import {CreateTodoButton} from './CreateTodoButton'
-import {TodoItem} from './TodoItem'
+import { AppUI } from "./AppUI";
 /* import './App.css';
  */
 let defaultTodos = [
@@ -40,30 +36,15 @@ function App() {
   
 
   return (
-    <React.Fragment >
-      <TodoCounter 
-      className='contenedor-counter' 
-      completedTodos={completedTodos}
-      totalTodos={totalTodos}
-      />
-      <TodoSearch 
-      className='contenedor-search'
-      searchValue={searchValue}
-      setSearchValue={setSearchValue}
-      />
-     
-       <TodoList className='contenedor-list'/>
-        {searchedTodos.map(todo=>(
-        <TodoItem key={todo.text}
-         text={todo.text} 
-         completed={todo.completed}
-         onComplete = {()=> completeTodos(todo.text)
-        }
-         />))}
-      <TodoList />
-      <CreateTodoButton className='contenedor-button'/> 
-      
-    </React.Fragment>
+    <AppUI
+    completedTodos={completedTodos}
+    totalTodos={totalTodos}
+    searchValue={searchValue}
+    setSearchValue={setSearchValue}
+    searchedTodos={searchedTodos}
+    completeTodos = {completeTodos}
+    
+    />
   )
 }
 
